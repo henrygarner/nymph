@@ -1,0 +1,2 @@
+depends "hadoop"
+depends "hbase"

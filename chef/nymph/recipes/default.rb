@@ -1,0 +1,20 @@
+template "/etc/hosts" do
+  mode "0644"
+end
+
+include_recipe "hbase::conf_pseudo"
+
+
+ remote_file "/home/vagrant/titan-0.2.0.zip" do
+   source "http://s3.thinkaurelius.com/downloads/titan/titan-0.2.0.zip"
+   owner "vagrant"
+   group "vagrant"
+   checksum "69b3c843095ddd6c6fc6969c20874a1f160eea7ff85af032a3a2537667a9e44a"
+ end
+
+ execute "unzip titan-0.2.0.zip" do
+   user "vagrant"
+   group "vagrant"
+   cwd "/home/vagrant"
+   not_if "test -d /home/vagrant/titan-0.2.0"
+ end
